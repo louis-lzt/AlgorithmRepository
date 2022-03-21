@@ -39,4 +39,26 @@ public class JBaseSort {
         arr[i] = arr[i] ^ arr[j];
     }
 
+    /**
+     * 插入排序
+     */
+    public void insertPort(int[] arr){
+        if(arr == null || arr.length < 2){return;
+        }
+        // 0~0有序
+        // 0~i有序
+        for(int i=0; i<arr.length; i++){
+
+            for(int j = i-1; j>=0&&arr[j] > arr[j+1]; j--){
+                swap(arr, j, j+1);
+            }
+            System.out.println(Arrays.toString(arr));
+        }
+    }
+
+    // for test
+    public static void comparator(int[] arr){
+        Arrays.sort(arr);
+    }
+
 }
