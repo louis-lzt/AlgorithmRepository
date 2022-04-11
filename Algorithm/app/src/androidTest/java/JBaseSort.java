@@ -95,4 +95,19 @@ public class JBaseSort {
         Arrays.sort(arr);
     }
 
+    /**
+     * 用递归方法找到一个数组中的最大值，系统上到底是怎么做的？
+     *
+     * T(N) = a*T(N/b) + O(N^d)
+     */
+    public static int process(int[] arr, int L,int R) {
+        if(L==R){ // arr[L..R]范围上只有一个数，直接返回， base case
+            return arr[L];
+        }
+        int mid = L + ((R-L) >> 1);// 中点
+        int leftMax = process(arr, L, mid);
+        int rightMax = process(arr, mid+1, R);
+        return Math.max(leftMax, rightMax);
+    }
+
 }
