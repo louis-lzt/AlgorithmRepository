@@ -98,7 +98,17 @@ public class JBaseSort {
     /**
      * 用递归方法找到一个数组中的最大值，系统上到底是怎么做的？
      *
+     * T(N):母问题的数据量 是N级别的
+     * N/b :子问题都是 N/b的规模
+     * a :  是指子问题调用了多少次
+     * O(N^d) : 除了子问题被调用多少次之外，剩下的过程 时间复杂度 是多少
+     *
      * T(N) = a*T(N/b) + O(N^d)
+     * log b^a < d    O(N^d)
+     * log b^a > d    O(N^log b^a)
+     * log b^a == d   O(N^d * logN)
+     *
+     * T(N) = 2*T(N/2) + O(1)
      */
     public static int process(int[] arr, int L,int R) {
         if(L==R){ // arr[L..R]范围上只有一个数，直接返回， base case
