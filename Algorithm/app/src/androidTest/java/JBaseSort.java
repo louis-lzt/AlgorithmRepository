@@ -120,4 +120,42 @@ public class JBaseSort {
         return Math.max(leftMax, rightMax);
     }
 
+    /**
+     * 归并排序
+     * 1) 整体就是一个简单递归，左边排好序，右边排好序，让整体有序
+     * 2) 让其整体有序的过程里用了排外序方法
+     * 3) 利用master公式来求解时间复杂度
+     * 4) 归并排序的实质
+     * 时间复杂度O(N*logN), 额外空间复杂度 O(N)
+     */
+    public static void mergeSort(int[] arr){
+        if (arr==null || arr.length <2){
+            return;
+        }
+        processMergeSort(arr, 0, arr.length-1);
+    }
+
+    private static void processMergeSort(int[] arr, int L, int R) {
+        if(L==R){
+            return;
+        }
+        int mid = L + ((R-L) >> 1);
+        processMergeSort(arr, L, mid);
+        processMergeSort(arr, mid+1, R);
+        merge(arr, L , mid, R);
+    }
+
+    private static void merge(int[] arr, int l, int mid, int r) {
+        int[] help = new int[r-l + 1];
+        int i = 0;
+        int p1 = l;
+        int p2 = mid + 1 ;
+        while(p1 <= mid && p2<=r){
+            help[i++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while(p1 <= mid){
+
+        }
+    }
+
 }
