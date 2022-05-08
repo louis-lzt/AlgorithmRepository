@@ -21,6 +21,8 @@ public class MainClass {
         for(int i=0;i<testTime; i++){
             int[] arr1 = generateRandomArray(maxSize, maxValue);
             int[] arr2 = copyArray(arr1);
+            JBaseSort.getInstance().insertPort(arr1);
+            JBaseSort.getInstance().comparator(arr2);
         }
     }
 
@@ -29,9 +31,9 @@ public class MainClass {
         if (arr1 == null) return null;
         int[] res = new int[arr1.length];
         for(int i=0; i< arr1.length; i++){
-
+            res[i] = arr1[i];
         }
-        return null;
+        return res;
     }
 
     private static int[] generateRandomArray(int maxSize, int maxValue) {

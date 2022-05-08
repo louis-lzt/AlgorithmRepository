@@ -183,7 +183,7 @@ public class JBaseSort {
     }
 
     // for test
-    public static void comparator(int[] arr) {
+    public void comparator(int[] arr) {
         Arrays.sort(arr);
     }
 
