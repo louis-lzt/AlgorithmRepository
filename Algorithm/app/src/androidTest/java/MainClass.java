@@ -11,8 +11,9 @@ public class MainClass {
 
         int[] aar = new int[]{1,5,8,2,3,9,4};
         int[] aar1 = new int[]{9,8,7,6,5,4,3};
+        JBaseSort.getInstance().quickSort(aar1);
 //        JBaseSort.getInstance().BubbleSort(aar1);
-        JBaseSort.getInstance().smallSum(new int[]{1,3,4,2,5});
+//        JBaseSort.getInstance().smallSum(new int[]{1,3,4,2,5});
 //        ByteTest.INSTANCE.abc();
         int testTime = 500000;
         int maxSize = 100;

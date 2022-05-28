@@ -9,6 +9,76 @@ import java.util.Arrays;
  */
 public class JBaseSort {
 
+    // 某个数现在处在index位置，往上继续移动
+    public static void heapInsert(int[] arr, int index) {
+        while (arr[index] > arr[(index - 1)] / 2) {
+            swap(arr, index, (index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+
+    public static void heapify(int[] arr, int index, int heapSize) {
+        int left = index * 2 + 1; // 左孩子的下标
+        while (left < heapSize) { // 下方还有孩子的时候
+
+            // 两个孩子中，谁的值大，把下表给largest
+            int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
+            // 父和孩子之间，谁的值大，就把下标 给 largest
+            largest = arr[largest] > arr[index] ? largest : index;
+            if (largest == index) {
+                break;
+            }
+            swap(arr, largest, index);
+            index = largest;
+            left = index * 2 + 1;
+        }
+
+    }
+
+    public static void swap1(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    /**
+     * 快速排序
+     */
+    public static void quickSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        quickSort(arr, 0, arr.length - 1);
+    }
+
+    private static void quickSort(int[] arr, int l, int r) {
+        if (l < r) {
+//            swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
+            int[] p = partition(arr, l, r);
+            quickSort(arr, l, p[0] - 1); // < 区
+            quickSort(arr, p[1] + 1, r);   // > 区
+        }
+    }
+
+    // 这是一个处理arr[l..r]的函数
+    // 默认以arr[r]做划分， arr[r] -> p <p ==p >p
+    // 返回等于区域(左边界， 右边界)， 所以返回一个长度为2的数组， res, res[0] res[1]
+    private static int[] partition(int[] arr, int l, int r) {
+        int less = l - 1;
+        int more = r;
+        while (l < more) {
+            if (arr[l] < arr[r]) {
+//                swap(arr, ++less, l++);
+            } else if (arr[l] > arr[r]) {
+//                swap(arr, --more, less++);
+            } else {
+                l++;
+            }
+        }
+//        swap(arr, --more, r);
+        return arr;
+    }
+
     /**
      * 归并排序
      * 1) 整体就是一个简单递归，左边排好序，右边排好序，让整体有序
@@ -80,7 +150,7 @@ public class JBaseSort {
         // 0000 1010 -》 0000 0101 -》 0000 0010
         int mid = l + ((r - l) >> 1);
         return processSmallSum(arr, l, mid) +
-                processSmallSum(arr, mid+1, r) +
+                processSmallSum(arr, mid + 1, r) +
                 mergeSmallSum(arr, l, mid, r);
     }
 
@@ -126,7 +196,7 @@ public class JBaseSort {
 
     // 前提是数组中的数 不重复才可以，否则将出现0的情况
     // 异或运算可用于：找出一个数组中，出现过奇数次的数。把数组异或一遍，偶数全消掉，留下的就是奇数
-    private void swap(int[] arr, int i, int j) {
+    private static void swap(int[] arr, int i, int j) {
         arr[i] = arr[i] ^ arr[j];
         arr[j] = arr[i] ^ arr[j];
         arr[i] = arr[i] ^ arr[j];
